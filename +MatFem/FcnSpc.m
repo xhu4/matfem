@@ -125,7 +125,7 @@ classdef FcnSpc < handle
 		
 		function plotu(spc, u, varargin)
 			uu = spc.project(u);
-			if ~ismember('EdgeColor', varargin)
+			if ~ismember('EdgeColor', varargin(1:2:end))
 				edgecolor = {'EdgeColor', [.6 .6 .6]};
 			else
 				edgecolor = {};
