@@ -1,0 +1,23 @@
+/ApplyBoundaryDirchlet2d.m/1.1/Wed Feb 21 00:22:32 2018//
+/ApplyBoundaryNeumann.m/1.1/Fri Jan 26 00:29:18 2018//
+/ApplyBoundaryRobin.m/1.1/Mon Jan 29 22:49:34 2018//
+/AssembleLoad2d.m/1.1/Thu Jun 21 09:14:44 2018//
+/AssembleStiff2d.m/1.1/Thu Jun 21 09:17:09 2018//
+/EllipticFem2d.m/1.1/Mon Jan 29 22:42:11 2018//
+/Eval2dTriBasis.m/1.1/Wed Jun 13 14:27:32 2018//
+/EvalFcn.m/1.1/Wed Jun 13 14:38:35 2018//
+/FinalProj1.m/1.1/Thu Jun 14 11:23:03 2018//
+/Gen2dTriMesh.m/1.1/Wed Jun 13 10:45:58 2018//
+/GenBoundaryEdges.m/1.1/Wed Jun 27 07:49:38 2018//
+/GenBoundaryNodes.m/1.1/Tue Feb 20 22:25:19 2018//
+/IntOverElem.m/1.1/Wed Jun 13 13:34:04 2018//
+/IntOverMesh.m/1.1/Thu Jun 14 11:01:37 2018//
+/IntegrateGauss2d.m/1.1/Thu Jun 21 09:15:41 2018//
+/VtcsOfElem.m/1.1/Wed Jun 13 14:12:21 2018//
+/elasticity.m/1.1/Thu Jun 28 08:13:02 2018//
+/errorNorm.m/1.1/Thu Jun 14 11:19:07 2018//
+/lgwt.m/1.1/Wed Feb 12 19:07:18 2014//
+/main.m/1.1/Thu Jun 21 07:48:57 2018//
+/test.m/1.1/Fri Jun 22 12:38:44 2018//
+/triquad.m/1.1/Mon Jan 22 22:58:28 2018//
+D
