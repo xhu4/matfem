@@ -30,7 +30,7 @@ This package is a (object oriented & vectorized) reimplementation of my homework
 
 ## Examples
 
-All `.m` files in this root folder are example codes.
+All `.m` files in demos folder are example codes.
 Need to write examples in matlab notebook format.
 
 ## ToDo List
