@@ -34,12 +34,12 @@ understand FEM, and is
 - Even though it's highly vectorized, it's not very fast
 - Does not run in parallel
 
-## Examples
+## Examples (Under Construction :construction:)
 
-All `.m` files in this root folder are example codes.
-Need to write examples in matlab notebook format.
+All `.xlm` files in this root folder are example codes.
+The hello world `a_poisson.xlm` is a good place to start.
 
-## ToDo List
+## Roadmap
 
-- [ ] Add documentation for package code :scream:
+- [ ] Add documentation for package code :memo:
 - [ ] `.m` -> `.mlx`
