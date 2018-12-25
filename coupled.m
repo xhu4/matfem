@@ -1,26 +1,40 @@
 function Tables = coupled
-harray = [1/8 1/16 1/32];
+clear; close all;
+set(0, 'DefaultTextFontSize', 16)
+set(0, 'DefaultAxesFontSize', 16)
+harray = [1/16];
 T_pm = MatFem.calcErrors();
 T_pf = T_pm; T_uc = T_pm; T_p=T_pm;
 basisType = 2;
-tic;
+% video = VideoWriter('coupled.mp4', 'MPEG-4');
+% open(video)
+gif = 'coupled.gif';
 for h = harray
-	Ts = evalCoupled(h, basisType, 0);
+	tic;
+	Ts = evalCoupled(h, basisType, 1, gif);
 	[pm,pf,uc,p] = Ts{:};
 	T_pm = [T_pm;pm];
 	T_pf = [T_pf;pf];
 	T_uc = [T_uc;uc];
 	T_p = [T_p;p];
+	toc;
 end
-toc;
 Tables = {T_pm, T_pf, T_uc, T_p};
 celldisp(Tables);
+% close(video)
+close
 end
 
-function errorTables = evalCoupled(h, basisType, plotresult)
+function errorTables = evalCoupled(h, basisType, plotresult, gif)
+if nargin < 4
+	gif = [];
 if nargin < 3
-	plotresult = 0;
+	plotresult = false;
 end
+end
+
+figure(1)
+set(gcf, 'Position', [0 0 1280 500])
 
 quadOrder = 9;
 
@@ -57,9 +71,10 @@ old = {spc.D.project(@(x,y)f.pm(x,y,t0));
 	spc.C.project(@(x,y)f.uc2(x,y,t0));
 	0};
 
+fprintf('%d DoFs\n', size(A,1));
 
 if plotresult
-	plotus(old, t0, spc, f);
+	plotus(old, t0, spc, f, gif);
 end
 
 for now = t(2:end)
@@ -76,7 +91,7 @@ for now = t(2:end)
 	xt = cell2mat(xt);
 	error = A*xt-b;
 	if plotresult
-		plotus(x, now, spc, f);
+		plotus(x, now, spc, f, gif);
 	end
 	
 	old = x;
@@ -246,25 +261,77 @@ assert(isequal(uc2b, uc2bt));
 end
 
 
-function plotus(sol, time, spc, f)
+function plotus(sol, time, spc, f, video)
+if nargin<5 || isempty(video)
+	writevideo = false;
+else
+	writevideo = true;
+end
+
 figure(1)
+
+qscale = 0.1;
 
 [pm, pf, uc1, uc2, ~] = sol{:};
 figure(1);
-subplot(3,2,1);
+subplot(2,3,1);
 spc.D.plotu(pm);
-subplot(3,2,2);
+title('\fontsize{24}numerical p_m')
+axis([0 1 0 0.75])
+caxis([-0.4 0.2])
+% axis equal;
+
+subplot(2,3,4);
 spc.D.plotu(@(x,y)f.pm(x,y,time));
-subplot(3,2,3);
+title('\fontsize{24}true p_m')
+axis([0 1 0 0.75])
+caxis([-0.4 0.2])
+% axis equal;
+
+subplot(2,3,2);
 spc.D.plotu(pf);
-subplot(3,2,4);
+title('\fontsize{24}numerical p_f')
+axis([0 1 0 0.75])
+caxis([-2 2])
+% axis equal;
+
+subplot(2,3,5);
 spc.D.plotu(@(x,y)f.pf(x,y,time));
-subplot(3,2,5);
-spc.C.quiver(uc1, uc2);
-subplot(3,2,6);
-spc.C.quiver(@(x,y)f.uc1(x,y,time),@(x,y)f.uc2(x,y,time));
-currentFigure = gcf;
-title(currentFigure.Children(end), ['t=',num2str(time)]);
+title('\fontsize{24}true p_f')
+axis([0 1 0 0.75])
+caxis([-2 2])
+% axis equal;
+
+subplot(2,3,3);
+spc.C.quiver(uc1*qscale, uc2*qscale);
+axis([-0.3 1.3 -0.5 0.25])
+title('\fontsize{24}numerical u_c')
+% axis equal;
+
+subplot(2,3,6);
+spc.C.quiver(@(x,y)f.uc1(x,y,time)*qscale,@(x,y)f.uc2(x,y,time)*qscale);
+axis([-0.3 1.3 -0.5 0.25])
+title('\fontsize{24}true u_c')
+% axis equal
+% currentFigure = gcf;
+% title(currentFigure.Children(end), ['t=',num2str(time)]);
+% mtit(['time = ', num2str(time, '%10.5f')])
+TimeBox = uicontrol('style', 'text');
+set(TimeBox, 'String', ['time = ', num2str(time, '%10.5f')])
+set(TimeBox, 'Position', [100,0,200,30])
+set(TimeBox, 'FontSize', 24)
 drawnow;
+
+if writevideo
+	frame = getframe(gcf);
+	im = frame2im(frame);
+	[imind, cm] = rgb2ind(im, 256);
+	if time == 0
+		imwrite(imind, cm, video, 'gif', 'Loopcount', inf);
+	else
+		imwrite(imind, cm, video, 'gif', 'WriteMode', 'append');
+	end
+% 	writeVideo(video, frame);
+end
 % pause
 end

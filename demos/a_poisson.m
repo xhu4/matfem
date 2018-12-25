@@ -1,7 +1,8 @@
+addpath('..')
 tic;
 h = [1/8 1/16 1/32 1/64];
 basisType = 2;
-T = MatFem.calcErrors();
+T = MatFem.calcErrors(); % Generate an empty table
 for ih = h
 	T = [T;evalExmp1(ih, basisType, 0)];
 end
@@ -44,12 +45,12 @@ b = assemble(V, [0 0], f);
 [b, A] = bc.applyDir('d', g, b, A);
 
 % solution
-sol = A\b;
+u_n = A\b;
 
 if plotresult
 figure(1/h);
 subplot(1,2,1);
-V.plotu(sol, 'EdgeColor', [.7, .7, .7]);
+V.plotu(u_n, 'EdgeColor', [.7, .7, .7]);
 title('numeric');
 
 U = u(V.Pb(:,1), V.Pb(:,2));
@@ -58,7 +59,7 @@ V.plotu(U, 'EdgeColor', [.7, .7, .7]);
 title('true');
 end
 
-errorTable = calcErrors(V, sol, u, {dudx,dudy}, h);
+errorTable = calcErrors(V, u_n, u, {dudx,dudy}, h);
 
 end
 

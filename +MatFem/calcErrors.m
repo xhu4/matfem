@@ -9,7 +9,11 @@ if nargin == 0
 	return
 end
 
-hx = h;
+if nargin < 5
+	h = '';
+else
+	h = {strtrim(rats(h))};
+end
 
 error_L2 = MatFem.errorNorm(fcnSpc, u, utrue, 'L2');
 
@@ -17,5 +21,4 @@ error_inf = MatFem.errorNorm(fcnSpc, u, utrue, 'inf');
 
 error_H1 = MatFem.errorNorm(fcnSpc, u, uders, 'H1');
 
-h = {strtrim(rats(hx))};
 T = table(h, error_inf, error_L2, error_H1);

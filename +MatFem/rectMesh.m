@@ -1,10 +1,10 @@
-function mesh = rectMesh(domain, n)
+function mesh = rectMesh(domain, shape)
 % RectMesh constructs a rectangular mesh.
 %	domain = [left, right, bottom, top] defines the boundary of
 %	the mesh,
-%	n = [nx, ny] defines the number of nodes in each direction.
-if isequal(size(n),[1 1])
-	n = [n n];
+%	n = [nx, ny] defines the number of *elements* in x/y direction.
+if isequal(size(shape),[1 1])
+	shape = [shape shape];
 end
 
 left = domain(1);
@@ -12,21 +12,21 @@ right = domain(2);
 bottom = domain(3);
 top = domain(4);
 
-nx = n(1);
-ny = n(2);
+nnodex = shape(1) + 1;
+nnodey = shape(2) + 1;
 
-if nx < 1
-	nx = (right-left)/nx+1;
+if nnodex < 1
+	nnodex = (right-left)/nnodex+1;
 end
-if ny < 1
-	ny = (top - bottom)/ny+1;
+if nnodey < 1
+	nnodey = (top - bottom)/nnodey+1;
 end
 
-x = linspace(left, right, nx);
-y = linspace(bottom, top, ny);
+x = linspace(left, right, nnodex);
+y = linspace(bottom, top, nnodey);
 
 P = gen_pb(x, y);
-T = gen_tb(nx, ny, 1);
+T = gen_tb(nnodex, nnodey, 1);
 mesh = MatFem.Mesh(P, T);
 
 end

@@ -1,5 +1,5 @@
 classdef FcnSpc < handle
-	% RectFcnSpc constructs a rectangular function space.
+	% A general function space.
 	
 	properties (SetAccess = private)
 		basisType	% basis type, 1 = linear, 2 = quadratic

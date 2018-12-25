@@ -1,4 +1,28 @@
 function r = assemble(spc, ders, f)
+% Assemble the matrix (vector) for the bilinear form
+%	$$	a(u, v) = \int f\cdot 
+%				\frac{\partial^{a+b}}{\partial x^a\partial y^b}v 
+%				\frac{\partial^{c+d}}{\partial x^c\partial y^d}u $$
+% if size(ders, 1) == 2,
+% Or the linear form
+%	$$  b(v) = \int f\cdot
+%				\frac{\partial^{a+b}}{\partial x^a\partial y^b}v $$
+% if size(ders, 1) == 1,
+% on function space `spc`.
+%
+% If ders.size(1) == 1, then the $u$ term is omitted and a vector will be
+% returned.
+% 
+% Args:
+%	spc:	FcnSpc object. The function space of integration.
+%	ders:	[a,b;c,d]. The derivative orders for test and trial functions.
+%	f:		float or a function handle. An additional function factor in 
+%			the integrand. Default is 1.
+%
+% Returns:
+%	A, matrix, if size(ders) == [2, 2].
+%	b, vector, if size(ders) == [1, 2].
+
 if nargin < 3
 	f = 1;
 end

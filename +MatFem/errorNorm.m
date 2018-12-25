@@ -1,22 +1,22 @@
-function ret = errorNorm(fcnSpc, u, u_true, normType)
+function ret = errorNorm(fcnSpc, u, u_true, norm_type)
 % ERRORNORM calculates the norm difference between u (vector) and u_true
 % (function)
 % 
 %	See also INTOVERMESH
 
 
-switch normType
+switch lower(norm_type)
 	case 'inf'
 		ret = errorNormInf(u, u_true, fcnSpc);
 	
-	case 'L2'
+	case 'l2'
 		ret = errorNormL2(u, u_true, fcnSpc);
 		
-	case 'H1'
+	case 'h1'
 		ret = errorNormH1(u, u_true, fcnSpc);
 		
 	otherwise
-		error('FEM:InvalidArgument', 'unknown norm type %s', normType);
+		error('FEM:InvalidArgument', 'unknown norm type %s', norm_type);
 end
 
 end

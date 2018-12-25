@@ -1,8 +1,11 @@
 classdef RectFcnSpc < handle
 	% RectFcnSpc constructs a rectangular function space.
+	%	Create a 2D rectangular function space with triangle elements.
+	%	The space is a Continuous Galerkin's finite element space with
+	%	order = 1 or 2, set by the argument basisType.
 	
 	properties (Access = private)
-		qpts
+		qpts	% quadrature points
 	end
 	
 	properties (SetAccess = private)

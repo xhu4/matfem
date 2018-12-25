@@ -1,18 +1,24 @@
 # matfem - a MATlab Finite Element Method package
 
 [![GitHub license](https://img.shields.io/apm/l/vim-mode.svg)](https://github.com/xhu4/matfem/blob/master/LICENSE)
+
 ![matlab](https://img.shields.io/badge/language-Matlab-blue.svg)
+
 [![Github all releases](https://img.shields.io/github/downloads/xhu4/matfem/total.svg)](https://GitHub.com/xhu4/matfem/releases/)
 
 An object-oriented highly vectorized matlab package for solving finite element
-models. Only support 2D problems.
+models. Only support 2D problems. Developed in 2016b. Have not tested in any
+other Matlab version.
 
 ![](coupled.gif)
 
-This package is a (object oriented & vectorized) reimplementation of my homework solution for a finite element class. This code is developed to help me understand FEM, and is
+This package is a (object oriented & vectorized) reimplementation of my homework
+solution for a finite element class. This code is developed to help me
+understand FEM, and is
 
 - **good for**: numerical analysis, try ideas fast and fail fast in small model,
-- **not good for**: production code, or any analysis that FEM algorithm itself is not of interest.
+- **not good for**: production code, or any analysis that FEM algorithm itself
+  is not of interest.
 
 ## Benefits
 
