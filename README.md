@@ -34,7 +34,7 @@ understand FEM, and is
 
 ## Examples (Under Construction :construction:)
 
-All `.xlm` files in this root folder are example codes.
+All `.xlm` files in the `demos` folder are example codes.
 The hello world `a_poisson.xlm` is a good place to start.
 
 ## Roadmap
