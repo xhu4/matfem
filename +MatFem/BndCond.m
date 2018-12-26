@@ -1,4 +1,5 @@
 classdef BndCond
+% BNDCOND controls boundaries of a mesh.
 	properties (SetAccess = private)
 		% a matrix containing information of nodes on boundary,
 		%	bndNodes(i,1) = condition type of the ith boundary node
@@ -46,6 +47,21 @@ classdef BndCond
 		
 		
 		function [b, A, M] = applyDir(obj, marker, f, b, A, M, shift)
+		%APPLYDIR apply Dirchlet boundary condition to boundaries with
+		% given marker.
+		%
+		% Args:
+		%	marker:	marker of the Dirchlet boundary.
+		%	f:		the values on the boundary. Can be scalar or function
+		%			handle.
+		%	b:		optional. Right hand side of the assembled system.
+		%	A:		optional. Left hand side matrix of the assembled system.
+		%	M:		optional. Mass matrix.
+		%	shift:	optional. shift the dofs in row and column indeces to 
+		%			apply Dirchlet condition. Default to 0. If is a scalar,
+		%			shift = [shift shift].
+		%
+		% See also APPLYEDGE
 			if nargin < 7
 				shift = [0 0];
 			elseif length(shift)==1
@@ -97,10 +113,23 @@ classdef BndCond
 		end
 		
 		function r = applyEdge(bnd, marker, ders, f)
+		%APPLYEDGE similar to ASSEMBLE, but integrate on boundary with
+		% given marker.
+		%
+		% Args:
+		%	bnd: the BndCond object;
+		%	marker: the marker of boundaries where the integration happens;
+		%	ders: derivatives of test [and trial] functions, similar to
+		%	that of function `assemble`.
+		%	f: additional functions to be integrated. Default to 1.
+		%
+		% See also ASSEMBLE.
+		
 			if nargin < 4
 				f = 1;
 			end
 			Tb = bnd.be(bnd.be(:,1)==marker,2:end);
+			% FIXME: not correct if ders are not 0.
 			bspc = MatFem.FcnSpc(bnd.spc.Pb, Tb, bnd.spc.basisType, ...
 								 bnd.nlv, bnd.spc.order);
 			r = MatFem.assemble(bspc, ders, f);

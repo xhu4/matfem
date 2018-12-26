@@ -1,14 +1,14 @@
 function bc = rectBndCond(spc, cond, range)
-% SQRBNDCOND construct the boundary condition for a [square]
-% mesh
+% RECTBNDCOND construct the boundary condition for a [rectangle]
+% mesh.
 %
+% Args:
 %	spc: the [square] function space to define the boundary
-%
 %	cond: a 3x3 matrix that defines the boundary conditions,
 %	each value corresponds to:
 %
 %		[left-bottom corner, bottom edge, right-bottom corner;
-%		 left edge,			 none sense,  right edge;
+%		 left edge,          none sense,  right edge;
 %		 left-top corner,	 top edge,	  right-top corner]
 %
 %	and the values can be
