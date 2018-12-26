@@ -1,9 +1,18 @@
 function mesh = rectMesh(domain, shape)
-% RectMesh constructs a rectangular mesh.
-%	domain = [left, right, bottom, top] defines the boundary of
-%	the mesh,
-%	n = [nx, ny] defines the number of *elements* in x/y direction.
-if isequal(size(shape),[1 1])
+%RECTMESH	construct a rectangular mesh.
+% mesh = RECTMESH(domain, shape) returns a 2D rectangle mesh defined by
+% {(x,y) | domain(1)?x?domain(2), domain(3)?y?domain(4)}. The mesh is
+% splitted into shape(1) cells in x direction and shape(2) cells in y 
+% direction.
+% 
+% mesh = RECTMESH(domain, h) returns the same 2D rectangle mesh but with a
+% cell size h(1) in x direction and h(2) in y direction.
+%
+% Author, Xiukun Hu, xiukun.hu@outlook.com
+%
+% See also Mesh
+
+if numel(shape) == 1
 	shape = [shape shape];
 end
 
@@ -12,15 +21,11 @@ right = domain(2);
 bottom = domain(3);
 top = domain(4);
 
-nnodex = shape(1) + 1;
-nnodey = shape(2) + 1;
+nx = shape(1);
+ny = shape(2);
 
-if nnodex < 1
-	nnodex = (right-left)/nnodex+1;
-end
-if nnodey < 1
-	nnodey = (top - bottom)/nnodey+1;
-end
+nnodex = nx+1;
+nnodey = ny+1;
 
 x = linspace(left, right, nnodex);
 y = linspace(bottom, top, nnodey);
