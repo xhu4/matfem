@@ -2,7 +2,7 @@ function Tables = coupled
 clear; close all;
 set(0, 'DefaultTextFontSize', 16)
 set(0, 'DefaultAxesFontSize', 16)
-harray = [1/16];
+harray = [1/8];
 T_pm = MatFem.calcErrors();
 T_pf = T_pm; T_uc = T_pm; T_p=T_pm;
 basisType = 2;
@@ -327,9 +327,9 @@ if writevideo
 	im = frame2im(frame);
 	[imind, cm] = rgb2ind(im, 256);
 	if time == 0
-		imwrite(imind, cm, video, 'gif', 'Loopcount', inf);
+		imwrite(imind, cm, video, 'gif', 'Loopcount', inf, 'DelayTime', 0.1);
 	else
-		imwrite(imind, cm, video, 'gif', 'WriteMode', 'append');
+		imwrite(imind, cm, video, 'gif', 'WriteMode', 'append', 'DelayTime', 0.1);
 	end
 % 	writeVideo(video, frame);
 end
