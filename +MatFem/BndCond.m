@@ -85,7 +85,11 @@ classdef BndCond
 			
 			if ~isempty(b)
 				pts = obj.spc.Pb(bn_,:);
-				b(bn_i) = f(pts(:,1),pts(:,2));
+				if isa(f, 'function_handle')
+					b(bn_i,:) = f(pts(:,1),pts(:,2));
+				else
+					b(bn_i,:) = f;
+				end
 			end
 			
 			if nargin >= 5 && ~isempty(A) && nargout>1

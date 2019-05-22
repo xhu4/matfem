@@ -1,10 +1,10 @@
 function r = assemble(spc, ders, f)
-% Assemble the matrix (vector) for the bilinear form
+% Assemble the matrix for the bilinear form
 %	$$	a(u, v) = \int f\cdot 
 %				\frac{\partial^{a+b}}{\partial x^a\partial y^b}v 
 %				\frac{\partial^{c+d}}{\partial x^c\partial y^d}u $$
 % if size(ders, 1) == 2,
-% Or the linear form
+% or assemble the vector for the linear form
 %	$$  b(v) = \int f\cdot
 %				\frac{\partial^{a+b}}{\partial x^a\partial y^b}v $$
 % if size(ders, 1) == 1,
