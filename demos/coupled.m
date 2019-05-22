@@ -146,8 +146,8 @@ end
 function spc = genspc1(dom, h, basisType, quadOrder)
 import MatFem.*
 
-msh_D = rectMesh(dom.D, h);
-msh_C = rectMesh(dom.C, h);
+msh_D = rectMesh(dom.D, 1/h);
+msh_C = rectMesh(dom.C, 1/h);
 
 spc.D = mesh2spc(msh_D, basisType, quadOrder);
 spc.C = mesh2spc(msh_C, basisType, quadOrder);
