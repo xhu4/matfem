@@ -37,7 +37,19 @@ understand FEM, and is
 All `.xlm` files in the `demos` folder are example codes.
 The hello world `a_poisson.xlm` is a good place to start.
 
+Matlab Live Codes:
+1. [Poisson Equation](demos/a_poisson.mlx)
+2. [Poisson Equation with Neumann Boundaries](demos/b_poisson_neumann.mlx)
+
+Matlab Script (Not documented yet):
+1. [Poisson Equation with Robin Boundaries](demos/exmp3.m)
+2. [Poisson Equation with Matrix-valued Coefficient](demos/final1.m)
+3. [Elasticity Equation](demos/elasticity.m)
+4. [Steady-State Stokes Equation](demos/stokesSteady.m)
+5. [Stokes Equation (time dependent)](demos/stokes.m)
+6. [Coupled Dual-Porosity-Stokes Model](demos/coupled.m)
+
 ## Roadmap
 
-- [ ] Add documentation for package code :memo:
-- [ ] `.m` -> `.mlx`
+- [ ] Add more detailed documentation for package code :memo:
+- [ ] Translate matlab script into well documented live code.
